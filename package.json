@@ -1,0 +1,21 @@
+{
+  "name": "@rappopo/cuk-http",
+  "version": "0.0.1",
+  "description": "HTTP Layer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ardhi Lukianto <ardhi@lukianto.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/cors": "^2.2.1",
+    "koa": "^2.5.1",
+    "koa-body": "^1.7.0",
+    "koa-conditional-get": "^2.0.0",
+    "koa-etag": "^3.0.0",
+    "koa-mount": "^3.0.0",
+    "koa-qs": "^2.0.0",
+    "koa-response-time": "^2.0.0"
+  }
+}
