@@ -1,17 +1,21 @@
 {
   "server": {
     "ip": "0.0.0.0",
-    "port": 3000,
-    "options": {}
+    "port": 3000
   },
-  "keys": [
-    "@rappopo/cuk-http"
-  ],
-  "http": {
-    "middleware": {
-      "etag": false,
-      "responseTime": false,
-      "queryString": "extended"
+  "key": {
+    "secureServer": {},
+    "app": [
+      "@rappopo/cuk-http"
+    ]
+  },
+  "cuks": {
+    "http": {
+      "middleware": {
+        "etag": false,
+        "responseTime": true,
+        "queryString": "extended"
+      }
     }
   }
 }
