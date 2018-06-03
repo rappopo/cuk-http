@@ -8,7 +8,7 @@ module.exports = function(cuk) {
   return {
     level: 2,
     handler: function(options) {
-      return koaBody(helper.makeOptions('http', 'cuks.http.middleware.bodyParser', options))
+      return koaBody(helper('core:makeOptions')('http', 'cuks.http.middleware.bodyParser', options))
     }
   }
 }

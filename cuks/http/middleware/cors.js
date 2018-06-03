@@ -5,7 +5,7 @@ module.exports = function(cuk) {
 
   return {
     handler: function(options) {
-      return require('@koa/cors')(helper.makeOptions(pkgId, 'cuks.http.middleware.cors', options))
+      return require('@koa/cors')(helper('core:makeOptions')(pkgId, 'cuks.http.middleware.cors', options))
     }
   }
 }

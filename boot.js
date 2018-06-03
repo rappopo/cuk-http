@@ -28,7 +28,7 @@ module.exports = function(cuk){
 
   return new Promise((resolve, reject) => {
     app.keys = pkg.cfg.key.app
-    require('./lib/build_middleware')(cuk, pkg.trace)
+    require('./lib/make_middleware')(cuk, pkg.trace)
     if (pkg.cfg.server) {
       pkg.cfg.server.ip = process.env.IP || pkg.cfg.server.ip || "127.0.0.1"
       pkg.cfg.server.port = process.env.PORT || pkg.cfg.server.port || 80
