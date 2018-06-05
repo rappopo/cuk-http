@@ -27,6 +27,7 @@ module.exports = function(cuk){
   }
 
   return new Promise((resolve, reject) => {
+    app.on('error', require('./lib/handle_error')(cuk))
     app.keys = pkg.cfg.key.app
     require('./lib/make_middleware')(cuk, pkg.trace)
     if (pkg.cfg.server) {

@@ -8,7 +8,7 @@ module.exports = function(cuk) {
   return {
     global: true,
     level: 1,
-    handler: function(options) {
+    handler: (options) => {
       app.use(require('koa-conditional-get')())
       return require('koa-etag')(helper('core:makeOptions')(pkgId, 'cuks.http.middleware.etag', options))
     }
