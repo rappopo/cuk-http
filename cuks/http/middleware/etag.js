@@ -5,12 +5,8 @@ module.exports = function(cuk) {
   const { _, helper } = cuk.lib
   const app = cuk.pkg[pkgId].lib.app
 
-  return {
-    global: true,
-    level: 1,
-    handler: (options) => {
-      app.use(require('koa-conditional-get')())
-      return require('koa-etag')(helper('core:makeOptions')(pkgId, 'cuks.http.middleware.etag', options))
-    }
+  return (options) => {
+    app.use(require('koa-conditional-get')())
+    return require('koa-etag')(helper('core:makeOptions')(pkgId, 'common.middlewareOptions.etag', options))
   }
 }
