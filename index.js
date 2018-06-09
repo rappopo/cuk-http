@@ -5,6 +5,6 @@ module.exports = function(cuk) {
   return Promise.resolve({
     id: 'http',
     tag: 'boot, middleware',
-    level: 2
+    level: 5
   })
 }
