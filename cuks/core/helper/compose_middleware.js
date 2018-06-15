@@ -3,13 +3,13 @@
 module.exports = function(cuk) {
   const { _, helper } = cuk.lib
 
-  return function(obj, name = 'unknown') {
+  return function(obj, name = 'unknown', isThirdLevel = false) {
     let mws = []
     if (_.isString(obj)) {
       _.each(helper('core:makeChoices')(obj), mw => {
         mws.push({ name: mw, handler: helper('http:middleware')(mw)() })
       })
-      cuk.pkg.http.trace('Middleware » Compose » %s -> %s', name, _.map(mws, 'name').join(', '))
+      helper('core:bootTrace')(`%${isThirdLevel ? 'E':'D'} Composing middleware %K %s %L %s`, null, null, name, null, _.map(mws, 'name').join(', '))
       return cuk.pkg.http.lib.compose(_.map(mws, 'handler'))
     }
     if (_.isPlainObject(obj)) {
@@ -31,7 +31,7 @@ module.exports = function(cuk) {
     }
     if (mws.length === 0)
       return (ctx, next) => { return next() }
-    cuk.pkg.http.trace('Middleware » Compose » %s -> %s', name, _.map(mws, 'name').join(', '))
+      helper('core:bootTrace')(`%${isThirdLevel ? 'E':'D'} Composing middleware %K %s %L %s`, null, null, name, null, _.map(mws, 'name').join(', '))
     return cuk.pkg.http.lib.compose(_.map(mws, 'handler'))
   }
 }
