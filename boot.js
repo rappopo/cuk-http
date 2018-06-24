@@ -1,9 +1,7 @@
 'use strict'
 
 const http = require('http'),
-  https = require('https'),
-  Koa = require('koa'),
-  app = new Koa()
+  https = require('https')
 
 module.exports = function(cuk){
   let id = 'http',
@@ -15,10 +13,7 @@ module.exports = function(cuk){
     pkg.trace('Listening to %s://%s:%s', protocol, address, port)
   }
 
-  pkg.lib.Koa = Koa
-  pkg.lib.app = app
-  pkg.lib.mount = require('koa-mount')
-  pkg.lib.compose = require('koa-compose')
+  const app = pkg.lib.app
 
   return new Promise((resolve, reject) => {
     app.on('error', require('./lib/handle_error')(cuk))
