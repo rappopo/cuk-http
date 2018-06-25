@@ -5,7 +5,6 @@ module.exports = function(cuk) {
 
   return function(name) {
     let names = (name || '').split(':')
-//    console.log(names)
     if (names.length !== 2) throw new Error(`Invalid http middleware (${name})`)
     const pkg = helper('core:pkg')(names[0])
     if (!pkg) throw new Error(`Invalid http middleware (${name})`)

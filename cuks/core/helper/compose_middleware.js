@@ -31,7 +31,7 @@ module.exports = function(cuk) {
     }
     if (mws.length === 0)
       return (ctx, next) => { return next() }
-      helper('core:bootTrace')(`%${isThirdLevel ? 'E':'D'} Composing middleware %K %s %L %s`, null, null, name, null, _.map(mws, 'name').join(', '))
+    helper('core:bootTrace')(`%${isThirdLevel ? 'E':'D'} Composing middleware %K %s %L %s`, null, null, name, null, _.map(mws, 'name').join(', '))
     return cuk.pkg.http.lib.compose(_.map(mws, 'handler'))
   }
 }
