@@ -10,7 +10,7 @@ module.exports = function(cuk) {
         mws.push({ name: mw, handler: helper('http:middleware')(mw)() })
       })
       helper('core:bootTrace')(`%${isThirdLevel ? 'E':'D'} Composing middleware %K %s %L %s`, null, null, name, null, _.map(mws, 'name').join(', '))
-      return cuk.pkg.http.lib.compose(_.map(mws, 'handler'))
+      return cuk.pkg.http.lib.koaCompose(_.map(mws, 'handler'))
     }
     if (_.isPlainObject(obj)) {
       _.forOwn(obj, (v, k) => {
@@ -32,6 +32,6 @@ module.exports = function(cuk) {
     if (mws.length === 0)
       return (ctx, next) => { return next() }
     helper('core:bootTrace')(`%${isThirdLevel ? 'E':'D'} Composing middleware %K %s %L %s`, null, null, name, null, _.map(mws, 'name').join(', '))
-    return cuk.pkg.http.lib.compose(_.map(mws, 'handler'))
+    return cuk.pkg.http.lib.koaCompose(_.map(mws, 'handler'))
   }
 }

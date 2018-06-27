@@ -2,9 +2,9 @@
 
 module.exports = function(cuk) {
   const { _, helper } = cuk.lib
-  const koaBody = cuk.pkg.http.lib.koaBody
+  const koaBodyParser = cuk.pkg.http.lib.koaBodyParser
 
   return (options) => {
-    return koaBody(helper('core:makeOptions')('http', 'common.middlewareOptions.bodyParser', options))
+    return koaBodyParser(helper('core:makeOptions')('http', 'common.middlewareOpts.bodyParser', options))
   }
 }

@@ -9,9 +9,9 @@ module.exports = function(cuk) {
     lib: {
       Koa: Koa,
       app: new Koa(),
-      mount: require('koa-mount'),
-      compose: require('koa-compose'),
-      koaBody: require('koa-bodyparser')
+      koaMount: require('koa-mount'),
+      koaCompose: require('koa-compose'),
+      koaBodyParser: require('koa-bodyparser')
     }
   })
 }

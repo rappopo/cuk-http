@@ -1,7 +1,8 @@
 'use strict'
 
 const http = require('http'),
-  https = require('https')
+  https = require('https'),
+  multer = require('koa-multer')
 
 module.exports = function(cuk){
   let id = 'http',
@@ -12,6 +13,8 @@ module.exports = function(cuk){
     const protocol = this.addContext ? 'https' : 'http'
     pkg.trace('Listening to %s://%s:%s', protocol, address, port)
   }
+
+  pkg.lib.multer = multer
 
   const app = pkg.lib.app
 
