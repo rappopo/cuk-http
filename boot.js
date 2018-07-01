@@ -24,6 +24,12 @@ module.exports = function(cuk){
     helper('core:bootTrace')('%A Loading http middlewares...', null)
     require('./lib/make_middleware')(cuk)
     let mws = _.get(pkg.cfg, 'cuks.http.middleware', [])
+    app.use(async (ctx, next) => {
+      await next()
+      if (ctx.status === 404) {
+        ctx.app.emit('error', helper('core:makeError')({ msg: 'Resource not found', status: 404 }), ctx)
+      }
+    })
     app.use(helper('http:composeMiddleware')(mws, '*'))
 
     if (pkg.cfg.common.server) {

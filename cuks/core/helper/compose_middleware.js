@@ -4,6 +4,10 @@ module.exports = function(cuk) {
   const { _, helper } = cuk.lib
 
   return function(obj, name = 'unknown', isThirdLevel = false) {
+    if (_.isFunction(obj)) {
+      helper('core:bootTrace')(`%${isThirdLevel ? 'E':'D'} Composing middleware %K %s`, null, null, name)
+      return cuk.pkg.http.lib.koaCompose([obj])
+    }
     let mws = []
     if (_.isString(obj)) {
       _.each(helper('core:makeChoices')(obj), mw => {
