@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function(cuk) {
-  const { helper, fs, path } = cuk.lib
+  const { helper, fs, path } = cuk.pkg.core.lib
   const multer = cuk.pkg.http.lib.multer
   const compose = cuk.pkg.http.lib.koaCompose
 

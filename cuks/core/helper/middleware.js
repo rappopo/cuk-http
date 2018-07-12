@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function(cuk) {
-  const { _, helper } = cuk.lib
+  const { _, helper } = cuk.pkg.core.lib
 
   return function(name) {
     let names = (name || '').split(':')

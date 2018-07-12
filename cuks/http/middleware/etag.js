@@ -2,7 +2,7 @@
 
 module.exports = function(cuk) {
   const pkgId = 'http'
-  const { _, helper } = cuk.lib
+  const { _, helper } = cuk.pkg.core.lib
   const app = cuk.pkg[pkgId].lib.app
 
   return (options) => {
