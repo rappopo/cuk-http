@@ -5,7 +5,7 @@ module.exports = function(cuk) {
 
   return function(obj, name = '', isThirdLevel = false) {
     if (_.isFunction(obj)) {
-      if (!_.isEmpty(name)) helper('core:bootTrace')(`%${isThirdLevel ? 'E':'D'} Composing middleware %K %s`, null, null, name)
+      if (!_.isEmpty(name)) helper('core:bootTrace')(`${isThirdLevel ? '|  |  |--->':'|  |--->'} Composing middleware => %s`, name)
       return cuk.pkg.http.lib.koaCompose([obj])
     }
     let mws = []
@@ -13,7 +13,7 @@ module.exports = function(cuk) {
       _.each(helper('core:makeChoices')(obj), mw => {
         mws.push({ name: mw, handler: helper('http:middleware')(mw)() })
       })
-      if (!_.isEmpty(name)) helper('core:bootTrace')(`%${isThirdLevel ? 'E':'D'} Composing middleware %K %s %L %s`, null, null, name, null, _.map(mws, 'name').join(', '))
+      if (!_.isEmpty(name)) helper('core:bootTrace')(`${isThirdLevel ? '|  |  |--->':'|  |--->'} Composing middleware => %s -> %s`, name, _.map(mws, 'name').join(', '))
       return cuk.pkg.http.lib.koaCompose(_.map(mws, 'handler'))
     }
     if (_.isPlainObject(obj)) {
@@ -35,7 +35,7 @@ module.exports = function(cuk) {
     }
     if (mws.length === 0)
       return (ctx, next) => { return next() }
-    if (!_.isEmpty(name)) helper('core:bootTrace')(`%${isThirdLevel ? 'E':'D'} Composing middleware %K %s %L %s`, null, null, name, null, _.map(mws, 'name').join(', '))
+    if (!_.isEmpty(name)) helper('core:bootTrace')(`${isThirdLevel ? '|  |  |--->':'|  |--->'} Composing middleware => %s -> %s`, name, _.map(mws, 'name').join(', '))
     return cuk.pkg.http.lib.koaCompose(_.map(mws, 'handler'))
   }
 }

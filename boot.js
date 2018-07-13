@@ -21,7 +21,7 @@ module.exports = function(cuk){
   return new Promise((resolve, reject) => {
     app.on('error', require('./lib/handle_error')(cuk))
     app.keys = pkg.cfg.common.key.app
-    helper('core:bootTrace')('%A Loading http middlewares...', null)
+    helper('core:bootTrace')('|  |- Loading http middlewares...')
     require('./lib/make_middleware')(cuk)
     let mws = _.get(pkg.cfg, 'cuks.http.middleware', [])
     app.use(async (ctx, next) => {
@@ -38,7 +38,7 @@ module.exports = function(cuk){
       const httpServer = http.createServer(app.callback())
         .listen(pkg.cfg.common.server.port, pkg.cfg.common.server.ip, reporter)
       pkg.lib.httpServer = httpServer
-      helper('core:bootTrace')('%A Starting service on http://%s:%s...', null, pkg.cfg.common.server.ip, pkg.cfg.common.server.port)
+      helper('core:bootTrace')('|  |- Starting service on http://%s:%s...', pkg.cfg.common.server.ip, pkg.cfg.common.server.port)
     }
     if (pkg.cfg.common.server && _.isBoolean(pkg.cfg.common.serverSecure) && pkg.cfg.common.serverSecure) {
       pkg.cfg.common.serverSecure = {
@@ -52,7 +52,7 @@ module.exports = function(cuk){
       const httpsServer = https.createServer(pkg.cfg.common.key.secureServer || {}, app.callback())
         .listen(pkg.cfg.common.serverSecure.port, pkg.cfg.common.serverSecure.ip, reporter)
       pkg.lib.httpsServer = httpsServer
-      helper('core:bootTrace')('%A Starting secure service on https://%s:%s...', null, pkg.cfg.common.serverSecure.ip, pkg.cfg.common.serverSecure.port)
+      helper('core:bootTrace')('|  |- Starting secure service on https://%s:%s...', pkg.cfg.common.serverSecure.ip, pkg.cfg.common.serverSecure.port)
     }
     resolve(true)
   })
