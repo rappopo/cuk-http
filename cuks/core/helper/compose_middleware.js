@@ -5,7 +5,7 @@ module.exports = function(cuk) {
 
   return function(obj, name = '', isThirdLevel = false) {
     if (_.isFunction(obj)) {
-      if (!_.isEmpty(name)) helper('core:bootTrace')(`${isThirdLevel ? '|  |  |--->':'|  |--->'} Composing middleware => %s`, name)
+      if (!_.isEmpty(name)) helper('core:trace')(`${isThirdLevel ? '|  |  |--->':'|  |--->'} Composing middleware => %s`, name)
       return cuk.pkg.http.lib.koaCompose([obj])
     }
     let mws = []
@@ -13,7 +13,7 @@ module.exports = function(cuk) {
       _.each(helper('core:makeChoices')(obj), mw => {
         mws.push({ name: mw, handler: helper('http:middleware')(mw)() })
       })
-      if (!_.isEmpty(name)) helper('core:bootTrace')(`${isThirdLevel ? '|  |  |--->':'|  |--->'} Composing middleware => %s -> %s`, name, _.map(mws, 'name').join(', '))
+      if (!_.isEmpty(name)) helper('core:trace')(`${isThirdLevel ? '|  |  |--->':'|  |--->'} Composing middleware => %s -> %s`, name, _.map(mws, 'name').join(', '))
       return cuk.pkg.http.lib.koaCompose(_.map(mws, 'handler'))
     }
     if (_.isPlainObject(obj)) {
@@ -23,7 +23,9 @@ module.exports = function(cuk) {
     } else if (_.isArray(obj)) {
       _.each(obj, o => {
         if (_.isString(o)) {
-          mws.push({ name: o, handler: helper('http:middleware')(o)() })
+          _.each(helper('core:makeChoices')(o), mw => {
+            mws.push({ name: mw, handler: helper('http:middleware')(mw)() })
+          })
         } else if (_.isFunction(o)) {
           mws.push({ name: 'anonymous', handler: o })
         } else if (_.isPlainObject(o)) {
@@ -35,7 +37,7 @@ module.exports = function(cuk) {
     }
     if (mws.length === 0)
       return (ctx, next) => { return next() }
-    if (!_.isEmpty(name)) helper('core:bootTrace')(`${isThirdLevel ? '|  |  |--->':'|  |--->'} Composing middleware => %s -> %s`, name, _.map(mws, 'name').join(', '))
+    if (!_.isEmpty(name)) helper('core:trace')(`${isThirdLevel ? '|  |  |--->':'|  |--->'} Composing middleware => %s -> %s`, name, _.map(mws, 'name').join(', '))
     return cuk.pkg.http.lib.koaCompose(_.map(mws, 'handler'))
   }
 }

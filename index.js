@@ -3,7 +3,7 @@
 module.exports = function(cuk) {
   const { path } = cuk.pkg.core.lib
   const Koa = require('koa')
-  return Promise.resolve({
+  return {
     id: 'http',
     level: 10,
     lib: {
@@ -13,5 +13,5 @@ module.exports = function(cuk) {
       koaCompose: require('koa-compose'),
       koaBodyParser: require('koa-bodyparser')
     }
-  })
+  }
 }

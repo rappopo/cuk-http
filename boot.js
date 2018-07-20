@@ -19,15 +19,32 @@ module.exports = function(cuk){
   const app = pkg.lib.app
 
   return new Promise((resolve, reject) => {
-    app.on('error', require('./lib/handle_error')(cuk))
+    const errorHandler = require('./lib/handle_error')(cuk)
+    app.context.onerror = errorHandler
+    app.on('error', (err, ctx) => {
+      if (pkg.cfg.common.printError)
+        console.log(err)
+    })
     app.keys = pkg.cfg.common.key.app
-    helper('core:bootTrace')('|  |- Loading http middlewares...')
+    helper('core:trace')('|  |- Loading http middlewares...')
     require('./lib/make_middleware')(cuk)
     let mws = _.get(pkg.cfg, 'cuks.http.middleware', [])
     app.use(async (ctx, next) => {
+      // dummy items for upcoming pkgs
+      ctx.state.reqId = helper('core:makeId')()
+      ctx.ts = text => text
+      ctx.t = text => text
+      ctx.state.site = {
+        domain: '*',
+        skin: 'view',
+        theme: null
+      }
       await next()
       if (ctx.status === 404) {
-        ctx.app.emit('error', helper('core:makeError')({ msg: 'Resource not found', status: 404 }), ctx)
+        errorHandler.call(ctx, helper('core:makeError')({
+          msg: 'Resource not found',
+          status: 404
+        }))
       }
     })
     app.use(helper('http:composeMiddleware')(mws, '*'))
@@ -38,7 +55,7 @@ module.exports = function(cuk){
       const httpServer = http.createServer(app.callback())
         .listen(pkg.cfg.common.server.port, pkg.cfg.common.server.ip, reporter)
       pkg.lib.httpServer = httpServer
-      helper('core:bootTrace')('|  |- Starting service on http://%s:%s...', pkg.cfg.common.server.ip, pkg.cfg.common.server.port)
+      helper('core:trace')('|  |- Starting service on http://%s:%s...', pkg.cfg.common.server.ip, pkg.cfg.common.server.port)
     }
     if (pkg.cfg.common.server && _.isBoolean(pkg.cfg.common.serverSecure) && pkg.cfg.common.serverSecure) {
       pkg.cfg.common.serverSecure = {
@@ -52,7 +69,7 @@ module.exports = function(cuk){
       const httpsServer = https.createServer(pkg.cfg.common.key.secureServer || {}, app.callback())
         .listen(pkg.cfg.common.serverSecure.port, pkg.cfg.common.serverSecure.ip, reporter)
       pkg.lib.httpsServer = httpsServer
-      helper('core:bootTrace')('|  |- Starting secure service on https://%s:%s...', pkg.cfg.common.serverSecure.ip, pkg.cfg.common.serverSecure.port)
+      helper('core:trace')('|  |- Starting secure service on https://%s:%s...', pkg.cfg.common.serverSecure.ip, pkg.cfg.common.serverSecure.port)
     }
     resolve(true)
   })

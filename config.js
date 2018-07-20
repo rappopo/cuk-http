@@ -21,10 +21,17 @@ module.exports = function(cuk) {
           upload: {
             dest: dest
           }
-        }
+        },
+        printError: true
       },
       cuks: {
-        log: true
+        log: true,
+        task: {
+          clearUploadDir: {
+            maxAge: "24h",
+            exclude: []
+          }
+        }
       }
     }
     resolve(cfg)
