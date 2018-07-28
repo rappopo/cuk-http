@@ -13,6 +13,7 @@ module.exports = function(cuk) {
   }
 
   return function(obj, name = '', isThirdLevel = false) {
+    if (!process.env.VERBOSE) name = 'silent'
     if (_.isFunction(obj)) {
       if (name !== 'silent') helper('core:trace')(`${isThirdLevel ? '|  |  |  +->':'|  |  +->'} Composing middleware -> %s`, name)
       return cuk.pkg.http.lib.koaCompose([obj])

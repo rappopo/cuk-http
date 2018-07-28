@@ -35,7 +35,7 @@ module.exports = function(cuk){
       ctx.ts = text => text
       ctx.t = text => text
       ctx.state.site = {
-        domain: '*',
+        domain: 'n.a',
         skin: 'view',
         theme: null
       }
