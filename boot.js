@@ -14,6 +14,8 @@ module.exports = function(cuk){
     pkg.trace('Listening to %s://%s:%s', protocol, address, port)
   }
 
+  const { minifier } = pkg.lib
+
   pkg.lib.multer = multer
 
   const app = pkg.lib.app
@@ -28,25 +30,8 @@ module.exports = function(cuk){
     app.keys = pkg.cfg.common.key.app
     helper('core:trace')('|  |- Loading http middlewares...')
     require('./lib/make_middleware')(cuk)
+    require('./lib/def_middleware')(cuk)
     let mws = _.get(pkg.cfg, 'cuks.http.middleware', [])
-    app.use(async (ctx, next) => {
-      // dummy items for upcoming pkgs
-      ctx.state.reqId = helper('core:makeId')()
-      ctx.ts = text => text
-      ctx.t = text => text
-      ctx.state.site = {
-        domain: 'n.a',
-        skin: 'view',
-        theme: null
-      }
-      await next()
-      if (ctx.status === 404) {
-        errorHandler.call(ctx, helper('core:makeError')({
-          msg: 'Resource not found',
-          status: 404
-        }))
-      }
-    })
     app.use(helper('http:composeMiddleware')(mws, '*'))
 
     if (pkg.cfg.common.server) {

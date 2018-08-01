@@ -22,6 +22,19 @@ module.exports = function(cuk) {
             dest: dest
           }
         },
+        minifier: {
+          enabled: false,
+          opts: {
+            removeComments: true,
+            removeCommentsFromCDATA: true,
+            collapseWhitespace: true,
+            collapseBooleanAttributes: true,
+            minifyJS: true,
+            minifyCSS: true,
+            ignoreCustomFragments: [/{([%#])[^]+?\1}/, /{{[^]+?}}/],
+            trimCustomFragments: true
+          }
+        },
         printError: true
       },
       cuks: {

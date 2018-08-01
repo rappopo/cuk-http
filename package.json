@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@koa/cors": "^2.2.1",
+    "html-minifier": "^3.5.19",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",

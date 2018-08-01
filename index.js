@@ -11,7 +11,8 @@ module.exports = function(cuk) {
       app: new Koa(),
       koaMount: require('koa-mount'),
       koaCompose: require('koa-compose'),
-      koaBodyParser: require('koa-bodyparser')
+      koaBodyParser: require('koa-bodyparser'),
+      minifier: require('html-minifier')
     }
   }
 }
