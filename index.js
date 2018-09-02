@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   const { path } = cuk.pkg.core.lib
   const Koa = require('koa')
   return {

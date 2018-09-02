@@ -1,7 +1,7 @@
 {
   "name": "@rappopo/cuk-http",
-  "version": "0.0.1",
-  "description": "HTTP Layer",
+  "version": "0.0.2",
+  "description": "Rappopo CUK HTTP Layer",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

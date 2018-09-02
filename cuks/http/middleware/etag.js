@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   const pkgId = 'http'
   const { _, helper } = cuk.pkg.core.lib
   const app = cuk.pkg[pkgId].lib.app

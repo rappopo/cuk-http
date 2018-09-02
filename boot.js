@@ -4,11 +4,11 @@ const http = require('http'),
   https = require('https'),
   multer = require('koa-multer')
 
-module.exports = function(cuk){
+module.exports = function (cuk){
   let id = 'http',
     pkg = cuk.pkg[id]
   const { _, debug, helper, path, fs } = cuk.pkg.core.lib
-  const reporter = function() {
+  const reporter = function () {
     const { address, port } = this.address()
     const protocol = this.addContext ? 'https' : 'http'
     pkg.trace('Listening to %s://%s:%s', protocol, address, port)

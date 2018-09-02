@@ -1,12 +1,12 @@
 'use strict'
 
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   const { _, globby, path, fs, moment, deleteEmpty } = cuk.pkg.core.lib
   const pkg = cuk.pkg.task
 
   return {
     time: '*/45 * * * *',
-    onTick: function() {
+    onTick: function () {
       this.locked = moment()
       const tmp = path.join(cuk.dir.data, 'tmp', 'upload')
       const files = globby.sync(tmp, '**/*', {
@@ -37,7 +37,7 @@ module.exports = function(cuk) {
           try {
             fs.unlinkSync(f)
             success++
-          } catch(e) {
+          } catch (e) {
             error++
           }
         else

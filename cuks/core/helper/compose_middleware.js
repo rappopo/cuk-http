@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   const { _, helper } = cuk.pkg.core.lib
 
   const hint = (mws, name, isThirdLevel) => {
@@ -12,7 +12,7 @@ module.exports = function(cuk) {
     }
   }
 
-  return function(obj, name = '', isThirdLevel = false) {
+  return function (obj, name = '', isThirdLevel = false) {
     if (!process.env.VERBOSE) name = 'silent'
     if (_.isFunction(obj)) {
       if (name !== 'silent') helper('core:trace')(`${isThirdLevel ? '|  |  |  +->':'|  |  +->'} Composing middleware -> %s`, name)

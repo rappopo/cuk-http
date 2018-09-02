@@ -1,9 +1,9 @@
 'use strict'
 
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   const { _, helper } = cuk.pkg.core.lib
 
-  return function(name) {
+  return function (name) {
     let names = (name || '').split(':')
     if (names.length !== 2) throw new Error(`Invalid http middleware (${name})`)
     const pkg = helper('core:pkg')(names[0])

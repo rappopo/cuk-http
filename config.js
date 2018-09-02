@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   const { path, fs } = cuk.pkg.core.lib
 
   return new Promise((resolve, reject) => {
