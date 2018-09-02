@@ -1,6 +1,6 @@
 {
   "name": "@rappopo/cuk-http",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Rappopo CUK HTTP Layer",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,10 @@
   },
   "author": "Ardhi Lukianto <ardhi@lukianto.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rappopo/cuk-http.git"
+  },
   "dependencies": {
     "@koa/cors": "^2.2.1",
     "html-minifier": "^3.5.19",
