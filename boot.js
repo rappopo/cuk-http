@@ -1,20 +1,18 @@
 'use strict'
 
-const http = require('http'),
-  https = require('https'),
-  multer = require('koa-multer')
+const http = require('http')
+const https = require('https')
+const multer = require('koa-multer')
 
-module.exports = function (cuk){
-  let id = 'http',
-    pkg = cuk.pkg[id]
-  const { _, debug, helper, path, fs } = cuk.pkg.core.lib
+module.exports = function (cuk) {
+  let id = 'http'
+  let pkg = cuk.pkg[id]
+  const { _, helper } = cuk.pkg.core.lib
   const reporter = function () {
     const { address, port } = this.address()
     const protocol = this.addContext ? 'https' : 'http'
     pkg.trace('Listening to %s://%s:%s', protocol, address, port)
   }
-
-  const { minifier } = pkg.lib
 
   pkg.lib.multer = multer
 
@@ -24,8 +22,7 @@ module.exports = function (cuk){
     const errorHandler = require('./lib/handle_error')(cuk)
     app.context.onerror = errorHandler
     app.on('error', (err, ctx) => {
-      if (pkg.cfg.common.printError)
-        console.log(err)
+      if (pkg.cfg.common.printError) console.log(err)
     })
     app.keys = pkg.cfg.common.key.app
     helper('core:trace')('|  |- Loading http middlewares...')
@@ -35,7 +32,7 @@ module.exports = function (cuk){
     app.use(helper('http:composeMiddleware')(mws, '*'))
 
     if (pkg.cfg.common.server) {
-      pkg.cfg.common.server.ip = process.env.IP || pkg.cfg.common.server.ip || "127.0.0.1"
+      pkg.cfg.common.server.ip = process.env.IP || pkg.cfg.common.server.ip || '127.0.0.1'
       pkg.cfg.common.server.port = process.env.PORT || pkg.cfg.common.server.port || 80
       const httpServer = http.createServer(app.callback())
         .listen(pkg.cfg.common.server.port, pkg.cfg.common.server.ip, reporter)

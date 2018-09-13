@@ -9,15 +9,15 @@ module.exports = function (cuk) {
     let cfg = {
       common: {
         server: {
-          ip: "0.0.0.0",
+          ip: '0.0.0.0',
           port: 3000
         },
         key: {
           secureServer: {},
-          app: ["@rappopo/cuk-http"]
+          app: ['@rappopo/cuk-http']
         },
         middlewareOpts: {
-          queryString: "extended",
+          queryString: 'extended',
           upload: {
             dest: dest
           }
@@ -41,7 +41,7 @@ module.exports = function (cuk) {
         log: true,
         task: {
           clearUploadDir: {
-            maxAge: "24h",
+            maxAge: '24h',
             exclude: []
           }
         }

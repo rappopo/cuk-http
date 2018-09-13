@@ -9,7 +9,7 @@ module.exports = function (cuk) {
     const pkg = helper('core:pkg')(names[0])
     if (!pkg) throw new Error(`Invalid http middleware (${name})`)
     let mw = _.get(pkg, `cuks.http.middleware.${names[1]}`)
-    if (!_.isFunction(mw))  throw new Error(`Invalid http middleware (${name})`)
+    if (!_.isFunction(mw)) throw new Error(`Invalid http middleware (${name})`)
     return mw
   }
 }

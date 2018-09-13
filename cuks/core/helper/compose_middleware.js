@@ -6,16 +6,16 @@ module.exports = function (cuk) {
   const hint = (mws, name, isThirdLevel) => {
     if (name === 'silent') return
     if (name === '') {
-      helper('core:trace')(`${isThirdLevel ? '|  |  |  +->':'|  |  +->'} Composing middleware -> %s`, _.map(mws, 'name').join(', '))
+      helper('core:trace')(`${isThirdLevel ? '|  |  |  +->' : '|  |  +->'} Composing middleware -> %s`, _.map(mws, 'name').join(', '))
     } else {
-      helper('core:trace')(`${isThirdLevel ? '|  |  |  +->':'|  |  +->'} Composing middleware => %s -> %s`, name, _.map(mws, 'name').join(', '))
+      helper('core:trace')(`${isThirdLevel ? '|  |  |  +->' : '|  |  +->'} Composing middleware => %s -> %s`, name, _.map(mws, 'name').join(', '))
     }
   }
 
   return function (obj, name = '', isThirdLevel = false) {
     if (!process.env.VERBOSE) name = 'silent'
     if (_.isFunction(obj)) {
-      if (name !== 'silent') helper('core:trace')(`${isThirdLevel ? '|  |  |  +->':'|  |  +->'} Composing middleware -> %s`, name)
+      if (name !== 'silent') helper('core:trace')(`${isThirdLevel ? '|  |  |  +->' : '|  |  +->'} Composing middleware -> %s`, name)
       return cuk.pkg.http.lib.koaCompose([obj])
     }
     let mws = []
@@ -45,8 +45,7 @@ module.exports = function (cuk) {
         }
       })
     }
-    if (mws.length === 0)
-      return (ctx, next) => { return next() }
+    if (mws.length === 0) return (ctx, next) => { return next() }
     hint(mws, name, isThirdLevel)
     return cuk.pkg.http.lib.koaCompose(_.map(mws, 'handler'))
   }

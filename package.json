@@ -1,6 +1,6 @@
 {
   "name": "@rappopo/cuk-http",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Rappopo CUK HTTP Layer",
   "main": "index.js",
   "scripts": {
