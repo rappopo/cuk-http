@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.0.5
+
+- set default site as localhost
+
 ### 0.0.4
 
 - Standard JS
