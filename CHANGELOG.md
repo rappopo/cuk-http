@@ -1,8 +1,12 @@
 ## Changelog
 
+### 0.0.6
+
+- Change site domain to site code
+
 ### 0.0.5
 
-- set default site as localhost
+- set default site as *
 
 ### 0.0.4
 
