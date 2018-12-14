@@ -7,7 +7,7 @@ module.exports = function (cuk) {
 
   return {
     upload: (opts) => {
-      let cfg = helper('core:makeOptions')('http', 'common.middlewareOpts.upload', opts)
+      let cfg = helper('core:makeOptions')('http', 'middlewareOpts.upload', opts)
       return multer(cfg)
     },
     wrap: (mw) => {

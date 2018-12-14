@@ -7,36 +7,34 @@ module.exports = function (cuk) {
     const dest = path.join(cuk.dir.data, 'tmp', 'upload')
     fs.ensureDirSync(dest)
     let cfg = {
-      common: {
-        server: {
-          ip: '0.0.0.0',
-          port: 3000
-        },
-        key: {
-          secureServer: {},
-          app: ['@rappopo/cuk-http']
-        },
-        middlewareOpts: {
-          queryString: 'extended',
-          upload: {
-            dest: dest
-          }
-        },
-        minifier: {
-          enabled: false,
-          opts: {
-            removeComments: true,
-            removeCommentsFromCDATA: true,
-            collapseWhitespace: true,
-            collapseBooleanAttributes: true,
-            minifyJS: true,
-            minifyCSS: true,
-            ignoreCustomFragments: [/{([%#])[^]+?\1}/, /{{[^]+?}}/],
-            trimCustomFragments: true
-          }
-        },
-        printError: true
+      server: {
+        ip: '0.0.0.0',
+        port: 3000
       },
+      key: {
+        secureServer: {},
+        app: ['@rappopo/cuk-http']
+      },
+      middlewareOpts: {
+        queryString: 'extended',
+        upload: {
+          dest: dest
+        }
+      },
+      minifier: {
+        enabled: false,
+        opts: {
+          removeComments: true,
+          removeCommentsFromCDATA: true,
+          collapseWhitespace: true,
+          collapseBooleanAttributes: true,
+          minifyJS: true,
+          minifyCSS: true,
+          ignoreCustomFragments: [/{([%#])[^]+?\1}/, /{{[^]+?}}/],
+          trimCustomFragments: true
+        }
+      },
+      printError: true,
       cuks: {
         log: true,
         task: {

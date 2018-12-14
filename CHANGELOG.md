@@ -1,5 +1,10 @@
 ## Changelog
 
+### 0.0.7
+
+- Break change: config root no longer use common & cuks.
+- Default log & task config moved to cuks folder
+
 ### 0.0.6
 
 - Change site domain to site code

@@ -6,6 +6,6 @@ module.exports = function (cuk) {
 
   return (options) => {
     app.use(require('koa-conditional-get')())
-    return require('koa-etag')(helper('core:makeOptions')('http', 'common.middlewareOpts.etag', options))
+    return require('koa-etag')(helper('core:makeOptions')('http', 'middlewareOpts.etag', options))
   }
 }
