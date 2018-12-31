@@ -19,6 +19,9 @@ module.exports = function (cuk) {
         queryString: 'extended',
         upload: {
           dest: dest
+        },
+        cors: {
+          origin: '*'
         }
       },
       minifier: {

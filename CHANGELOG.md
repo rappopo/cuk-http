@@ -4,6 +4,7 @@
 
 - Break change: config root no longer use common & cuks.
 - Default log & task config moved to cuks folder
+- Default CORS options
 
 ### 0.0.6
 
