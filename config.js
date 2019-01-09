@@ -15,6 +15,10 @@ module.exports = function (cuk) {
         secureServer: {},
         app: ['@rappopo/cuk-http']
       },
+      info: {
+        contactName: 'Webmaster',
+        contactEmail: 'webmaster@localhost.localdomain'
+      },
       middlewareOpts: {
         queryString: 'extended',
         upload: {
