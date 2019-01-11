@@ -6,7 +6,7 @@ const multer = require('koa-multer')
 
 module.exports = function (cuk) {
   let pkg = cuk.pkg['http']
-  const { _, helper, config } = cuk.pkg.core.lib
+  const { _, helper } = cuk.pkg.core.lib
   const reporter = function () {
     const { address, port } = this.address()
     const protocol = this.addContext ? 'https' : 'http'
@@ -16,7 +16,7 @@ module.exports = function (cuk) {
   pkg.lib.multer = multer
 
   const app = pkg.lib.app
-  const cfg = config('http')
+  const cfg = helper('core:config')('http')
 
   return new Promise((resolve, reject) => {
     const errorHandler = require('./lib/handle_error')(cuk)

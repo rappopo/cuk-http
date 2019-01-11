@@ -15,9 +15,11 @@ module.exports = function (cuk) {
         secureServer: {},
         app: ['@rappopo/cuk-http']
       },
-      info: {
-        contactName: 'Webmaster',
-        contactEmail: 'webmaster@localhost.localdomain'
+      // TODO: better handling of default site
+      defSite: {
+        name: 'Default Website',
+        pic_name: 'Webmaster',
+        pic_email: 'webmaster@localhost.localdomain'
       },
       middlewareOpts: {
         queryString: 'extended',

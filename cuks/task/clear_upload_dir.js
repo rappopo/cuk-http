@@ -1,13 +1,13 @@
 'use strict'
 
 module.exports = function (cuk) {
-  const { _, helper, globby, path, fs, moment, deleteEmpty, config } = cuk.pkg.core.lib
+  const { _, helper, globby, path, fs, moment, deleteEmpty } = cuk.pkg.core.lib
   const pkg = cuk.pkg.task
 
   return {
     time: '*/45 * * * *',
     onTick: function () {
-      const cfg = config('http')
+      const cfg = helper('core:config')('http')
       this.locked = moment()
       const tmp = path.join(cuk.dir.data, 'tmp', 'upload')
       const files = globby.sync(tmp, '**/*', {
