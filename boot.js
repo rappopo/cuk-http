@@ -29,7 +29,7 @@ module.exports = function (cuk) {
     require('./lib/make_middleware')(cuk)
     require('./lib/def_middleware')(cuk)
     let mws = _.get(pkg.cfg, 'cuks.http.middleware', [])
-    app.use(helper('http:composeMiddleware')(mws, '*'))
+    if (!_.isEmpty(mws)) app.use(helper('http:composeMiddleware')(mws, '*'))
 
     if (cfg.server) {
       cfg.server.ip = process.env.IP || cfg.server.ip || '127.0.0.1'

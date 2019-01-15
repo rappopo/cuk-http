@@ -13,6 +13,7 @@ module.exports = function (cuk) {
   }
 
   return function (obj, name = '', isThirdLevel = false) {
+    if (_.isEmpty(obj)) throw helper('core:makeError')('Empty middleware given')
     if (!process.env.VERBOSE) name = 'silent'
     if (_.isFunction(obj)) {
       if (name !== 'silent') helper('core:trace')(`${isThirdLevel ? '|  |  |  +->' : '|  |  +->'} Composing middleware -> %s`, name)
@@ -32,6 +33,7 @@ module.exports = function (cuk) {
       })
     } else if (_.isArray(obj)) {
       _.each(obj, o => {
+        if (_.isEmpty(o)) return
         if (_.isString(o)) {
           _.each(helper('core:makeChoices')(o), mw => {
             mws.push({ name: mw, handler: helper('http:middleware')(mw)() })
