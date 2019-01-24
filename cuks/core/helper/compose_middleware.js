@@ -1,5 +1,6 @@
 'use strict'
 
+// TODO: ability to skip middleware if not found
 module.exports = function (cuk) {
   const { _, helper } = cuk.pkg.core.lib
 
@@ -21,9 +22,7 @@ module.exports = function (cuk) {
     }
     let mws = []
     if (_.isString(obj)) {
-      _.each(helper('core:makeChoices')(obj), mw => {
-        mws.push({ name: mw, handler: helper('http:middleware')(mw)() })
-      })
+      helper('http:splitForMiddleware')(obj, mws)
       hint(mws, name, isThirdLevel)
       return cuk.pkg.http.lib.koaCompose(_.map(mws, 'handler'))
     }
@@ -35,15 +34,17 @@ module.exports = function (cuk) {
       _.each(obj, o => {
         if (_.isEmpty(o)) return
         if (_.isString(o)) {
-          _.each(helper('core:makeChoices')(o), mw => {
-            mws.push({ name: mw, handler: helper('http:middleware')(mw)() })
-          })
+          helper('http:splitForMiddleware')(o, mws)
         } else if (_.isFunction(o)) {
           mws.push({ name: 'anonymous', handler: o })
         } else if (_.isPlainObject(o)) {
-          _.forOwn(o, (v, k) => {
-            mws.push({ name: k, handler: helper('http:middleware')(k)(v) })
-          })
+          let handler
+          try {
+            handler = o.handler || helper('http:middleware')(o.name)(o.options)
+          } catch (e) {
+            if (!o.skipMissing) throw e
+          }
+          mws.push({ name: o.name, handler: handler })
         }
       })
     }
